@@ -45,6 +45,18 @@ dashboard "nba_analysis_detail" {
         width = 6
         query = query.team_performance_over_time
         args  = [self.input.team_id.value]
+        axes {
+          x {
+            title {
+              value = "Years"
+            }
+          }
+          y {
+            title {
+              value = "Wins"
+            }
+          }
+        }
       }
 
       table {
