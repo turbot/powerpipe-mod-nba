@@ -1,4 +1,4 @@
-# NBA Database Dashboard
+# NBA Database Mod for PowerPipe
 
 Analyze teams, players and games data using SQLite and PowerPipe.
 
