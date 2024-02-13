@@ -2,6 +2,10 @@
 
 Analyze teams, players and games data using SQLite and PowerPipe.
 
+![nba-analysis-detail-image](https://github.com/turbot/powerpipe-mod-nba/assets/72413708/003ae23b-5ad4-47cb-b51e-ab75725f5ebc)
+
+![nba-analysis-dashboard-image](https://github.com/turbot/powerpipe-mod-nba/assets/72413708/7ecc750f-a1f4-4661-8f5d-2035e663bec9)
+
 ## Installation
 
 Download and install Powerpipe (https://powerpipe.io/downloads). Or use Brew:
