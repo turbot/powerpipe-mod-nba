@@ -254,85 +254,83 @@ dashboard "nba_analysis_dashboard" {
 
 query "player_experience_distribution_by_team" {
   sql = <<-EOQ
-    SELECT
+    select
       team_name,
-      SUM(CASE WHEN season_exp = 0 THEN 1 ELSE 0 END) AS Rookies,
-      SUM(CASE WHEN season_exp BETWEEN 1 AND 3 THEN 1 ELSE 0 END) AS "1_to_3_years",
-      SUM(CASE WHEN season_exp BETWEEN 4 AND 6 THEN 1 ELSE 0 END) AS "4_to_6_years",
-      SUM(CASE WHEN season_exp >= 7 THEN 1 ELSE 0 END) AS "7_years_plus"
-    FROM
+      sum(case when season_exp = 0 then 1 else 0 end) as Rookies,
+      sum(case when season_exp between 1 and 3 then 1 else 0 end) as "1_to_3_years",
+      sum(case when season_exp between 4 and 6 then 1 else 0 end) as "4_to_6_years",
+      sum(case when season_exp >= 7 then 1 else 0 end) as "7_years_plus"
+    from
       common_player_info
-    GROUP BY
+    group by
       team_name
-    ORDER BY
+    order by
       team_name;
   EOQ
 }
 
 query "top_teams_by_points_per_game" {
   sql = <<-EOQ
-    WITH total_points AS (
-      SELECT
-        team_id_home AS team_id,
-        SUM(pts_home) AS points
-      FROM
+    with total_points as (
+      select
+        team_id_home as team_id,
+        sum(pts_home) as points
+      from
         game
-      GROUP BY
+      group by
         team_id_home
-      UNION ALL
-      SELECT
+      union all
+      select
         team_id_away,
-        SUM(pts_away)
-      FROM
+        sum(pts_away)
+      from
         game
-      GROUP BY
+      group by
         team_id_away
     ),
-    game_counts AS (
-      SELECT
+    game_counts as (
+      select
         team_id,
-        COUNT(*) AS games_played
-      FROM (
-        SELECT team_id_home AS team_id FROM game
-        UNION ALL
-        SELECT team_id_away FROM game
+        COUNT(*) as games_played
+      from (
+        select team_id_home as team_id from game
+        union all
+        select team_id_away from game
       )
-      GROUP BY team_id
+      group by team_id
     ),
-    avg_points AS (
-      SELECT
+    avg_points as (
+      select
         tp.team_id,
-        SUM(tp.points) / gc.games_played AS avg_points_per_game
-      FROM
+        sum(tp.points) / gc.games_played as avg_points_per_game
+      from
         total_points tp
-      JOIN
-        game_counts gc ON tp.team_id = gc.team_id
-      GROUP BY
+      join game_counts gc on tp.team_id = gc.team_id
+      group by
         tp.team_id
-      ORDER BY
+      order by
         avg_points_per_game DESC
     )
-    SELECT
+    select
       t.full_name,
       ap.avg_points_per_game
-    FROM
+    from
       avg_points ap
-    JOIN
-      team t ON ap.team_id = t.id;
+    join team t on ap.team_id = t.id;
   EOQ
 }
 
 query "top_10_team_by_total_wins" {
   sql = <<-EOQ
     select
-        team_name_home,
-        sum(case when wl_home = 'W' then 1 else 0 end + case when wl_away = 'W' then 1 else 0 end) as total_wins
+      team_name_home,
+      sum(case when wl_home = 'W' then 1 else 0 end + case when wl_away = 'W' then 1 else 0 end) as total_wins
     from
-        game
+      game
     group by
-        team_name_home
+      team_name_home
     order by
-        total_wins desc
+      total_wins desc
     limit 10;
     EOQ
 }
@@ -442,7 +440,8 @@ query "team_foundation_years" {
       year_founded
     from
       team
-    order by year_founded;
+    order by
+      year_founded;
   EOQ
 }
 
@@ -474,8 +473,10 @@ query "team_average_points_allowed" {
         pts_away
       from game
     ) as combined
-    group by team_id
-    order by "Average Points Allowed";
+    group by
+      team_id
+    order by
+      "Average Points Allowed";
   EOQ
 }
 
@@ -486,9 +487,12 @@ query "player_birth_countries_all" {
       count(*) as "Number of Players"
     from
       common_player_info
-    where country is not null and trim(country) <> ''
-    group by country
-    order by "Number of Players" desc;
+    where
+      country is not null and trim(country) <> ''
+    group by
+      country
+    order by
+      "Number of Players" desc;
   EOQ
 }
 

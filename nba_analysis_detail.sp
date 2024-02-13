@@ -189,7 +189,7 @@ query "team_points_per_game" {
       from
         total_points tp
       join
-        game_counts gc ON tp.team_id = gc.team_id
+        game_counts gc on tp.team_id = gc.team_id
       group by
         tp.team_id
       order by
