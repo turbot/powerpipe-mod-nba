@@ -2,8 +2,6 @@
 
 Analyze teams, players and games data using SQLite and PowerPipe.
 
-![nba-analysis-detail-image](https://github.com/turbot/powerpipe-mod-nba/assets/72413708/003ae23b-5ad4-47cb-b51e-ab75725f5ebc)
-
 ![nba-analysis-dashboard-image](https://github.com/turbot/powerpipe-mod-nba/assets/72413708/7ecc750f-a1f4-4661-8f5d-2035e663bec9)
 
 ## Installation
@@ -28,7 +26,7 @@ Download the [NBA Database](https://www.kaggle.com/datasets/wyattowalsh/basketba
 Unzip the file to the cloned mod directory.
 
 ```sh
-unzip /Users/root/Downloads/archive.zip
+unzip /Users/username/Downloads/archive.zip
 ```
 
 ## Usage
