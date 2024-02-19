@@ -21,7 +21,7 @@ cd powerpipe-mod-nba
 
 ## Get the Dataset
 
-Download the [NBA Database](https://www.kaggle.com/datasets/wyattowalsh/basketball/data).
+Log in to Kaggle, download the [NBA Database](https://www.kaggle.com/datasets/wyattowalsh/basketball/data).
 
 Unzip the file to the cloned mod directory.
 
