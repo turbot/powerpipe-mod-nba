@@ -66,8 +66,6 @@ dashboard "nba_analysis_detail" {
         query = query.team_overview
         args  = [self.input.team_id.value]
       }
-
-
     }
 
     container {
@@ -79,7 +77,6 @@ dashboard "nba_analysis_detail" {
         query = query.players_experience_in_team
         args  = [self.input.team_id.value]
       }
-
 
       chart {
         title = "Player Nationalities in the Team"
@@ -130,7 +127,9 @@ query "team_arena_capacity" {
     from
       team_details
     where
-      team_id = $1;
+      team_id = $1
+    order by
+      arenacapacity desc;
   EOQ
 }
 
@@ -220,7 +219,7 @@ query "team_performance_over_time" {
     group by
       gs.season
     order by
-      gs.season;
+      total_wins;
   EOQ
 }
 

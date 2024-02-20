@@ -252,20 +252,131 @@ dashboard "nba_analysis_dashboard" {
   }
 }
 
-query "player_experience_distribution_by_team" {
+query "total_active_players" {
   sql = <<-EOQ
     select
-      team_name,
-      sum(case when season_exp = 0 then 1 else 0 end) as Rookies,
-      sum(case when season_exp between 1 and 3 then 1 else 0 end) as "1_to_3_years",
-      sum(case when season_exp between 4 and 6 then 1 else 0 end) as "4_to_6_years",
-      sum(case when season_exp >= 7 then 1 else 0 end) as "7_years_plus"
+      count(*) as "Total Active Players"
+    from
+      player
+    where
+      is_active = 1;
+  EOQ
+}
+
+query "total_teams" {
+  sql = <<-EOQ
+    select
+      count(*) as "Total Teams"
+    from
+      team;
+  EOQ
+}
+
+query "total_rookie_players" {
+  sql = <<-EOQ
+    select
+      count(*) as "Rookie Players"
     from
       common_player_info
-    group by
-      team_name
+    where
+      season_exp = 0;
+  EOQ
+}
+
+query "home_away_wins_by_team" {
+  sql = <<-EOQ
+    with home_wins as (
+      select
+        team_id_home as team_id,
+        count(*) as home_wins
+      from
+        game
+      where
+        wl_home = 'W'
+      group by
+        team_id_home
+    ),
+    away_wins as (
+      select
+        team_id_away as team_id,
+        count(*) as away_wins
+      from
+        game
+      where
+        wl_away = 'W'
+      group by
+        team_id_away
+    )
+    select
+      t.full_name,
+      h.home_wins,
+      a.away_wins
+    from
+      home_wins h
+      join away_wins a on h.team_id = a.team_id
+      left join team t on h.team_id = t.id
     order by
-      team_name;
+      a.away_wins, h.home_wins desc;
+    EOQ
+}
+
+query "home_away_top_points_by_team" {
+  sql = <<-EOQ
+    with home_points as (
+      select
+        team_id_home as team_id,
+        sum(pts_home) as home_points
+      from
+        game
+      group by
+        team_id_home
+    ),
+    away_points as (
+      select
+        team_id_away as team_id,
+        sum(pts_away) as away_points
+      from
+        game
+      group by
+        team_id_away
+    )
+    select
+      t.full_name,
+      h.home_points,
+      a.away_points
+    from
+      home_points h
+      join away_points a on h.team_id = a.team_id
+      left join team t on h.team_id = t.id
+    order by
+      a.away_points, h.home_points desc;
+  EOQ
+}
+
+query "top_10_team_by_total_wins" {
+  sql = <<-EOQ
+    select
+      team_name_home,
+      sum(case when wl_home = 'W' then 1 else 0 end + case when wl_away = 'W' then 1 else 0 end) as total_wins
+    from
+      game
+    group by
+      team_name_home
+    order by
+      total_wins desc
+    limit 10;
+    EOQ
+}
+
+query "team_arena_capacities" {
+  sql = <<-EOQ
+    select
+      nickname,
+      arenacapacity
+    from
+      team_details
+    order by
+      arenacapacity desc;
   EOQ
 }
 
@@ -316,142 +427,26 @@ query "top_teams_by_points_per_game" {
       ap.avg_points_per_game
     from
       avg_points ap
-    join team t on ap.team_id = t.id;
-  EOQ
-}
-
-query "top_10_team_by_total_wins" {
-  sql = <<-EOQ
-    select
-      team_name_home,
-      sum(case when wl_home = 'W' then 1 else 0 end + case when wl_away = 'W' then 1 else 0 end) as total_wins
-    from
-      game
-    group by
-      team_name_home
+    join team t on ap.team_id = t.id
     order by
-      total_wins desc
-    limit 10;
-    EOQ
-}
-
-query "home_away_top_points_by_team" {
-  sql = <<-EOQ
-    with home_points as (
-      select
-        team_id_home as team_id,
-        sum(pts_home) as home_points
-      from
-        game
-      group by
-        team_id_home
-    ),
-    away_points as (
-      select
-        team_id_away as team_id,
-        sum(pts_away) as away_points
-      from
-        game
-      group by
-        team_id_away
-    )
-    select
-      t.full_name,
-      h.home_points,
-      a.away_points
-    from
-      home_points h
-      join away_points a on h.team_id = a.team_id
-      left join team t on h.team_id = t.id;
+      avg_points_per_game DESC;
   EOQ
 }
 
-query "home_away_wins_by_team" {
-  sql = <<-EOQ
-    with home_wins as (
-      select
-        team_id_home as team_id,
-        count(*) as home_wins
-      from
-        game
-      where
-        wl_home = 'W'
-      group by
-        team_id_home
-    ),
-    away_wins as (
-      select
-        team_id_away as team_id,
-        count(*) as away_wins
-      from
-        game
-      where
-        wl_away = 'W'
-      group by
-        team_id_away
-    )
-    select
-      t.full_name,
-      h.home_wins,
-      a.away_wins
-    from
-      home_wins h
-      join away_wins a on h.team_id = a.team_id
-      left join team t on h.team_id = t.id;
-    EOQ
-}
-
-query "total_active_players" {
+query "player_experience_distribution_by_team" {
   sql = <<-EOQ
     select
-      count(*) as "Total Active Players"
-    from
-      player
-    where
-      is_active = 1;
-  EOQ
-}
-
-query "total_teams" {
-  sql = <<-EOQ
-    select
-      count(*) as "Total Teams"
-    from
-      team;
-  EOQ
-}
-
-query "total_rookie_players" {
-  sql = <<-EOQ
-    select
-      count(*) as "Rookie Players"
+      team_name,
+      sum(case when season_exp = 0 then 1 else 0 end) as Rookies,
+      sum(case when season_exp between 1 and 3 then 1 else 0 end) as "1_to_3_years",
+      sum(case when season_exp between 4 and 6 then 1 else 0 end) as "4_to_6_years",
+      sum(case when season_exp >= 7 then 1 else 0 end) as "7_years_plus"
     from
       common_player_info
-    where
-      season_exp = 0;
-  EOQ
-}
-
-query "team_foundation_years" {
-  sql = <<-EOQ
-    select
-      city,
-      nickname,
-      year_founded
-    from
-      team
+    group by
+      team_name
     order by
-      year_founded;
-  EOQ
-}
-
-query "team_arena_capacities" {
-  sql = <<-EOQ
-    select
-      nickname,
-      arenacapacity
-    from
-      team_details;
+      team_name;
   EOQ
 }
 
