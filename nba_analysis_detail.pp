@@ -196,7 +196,7 @@ query "team_points_per_game" {
       group by
         tp.team_id
       order by
-        avg_points_per_game DESC
+        avg_points_per_game desc
     )
     select
       'Average Points Per Game' as label,
@@ -272,7 +272,7 @@ query "player_nationalities_in_team" {
     group by
       country
     order by
-      value DESC
+      value desc
     limit 5;
   EOQ
 }

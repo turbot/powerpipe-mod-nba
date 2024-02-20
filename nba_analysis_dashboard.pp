@@ -419,7 +419,7 @@ query "top_teams_by_points_per_game" {
       group by
         tp.team_id
       order by
-        avg_points_per_game DESC
+        avg_points_per_game desc
     )
     select
       t.full_name,
@@ -428,7 +428,7 @@ query "top_teams_by_points_per_game" {
       avg_points ap
     join team t on ap.team_id = t.id
     order by
-      avg_points_per_game DESC;
+      avg_points_per_game desc;
   EOQ
 }
 
