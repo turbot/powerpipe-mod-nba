@@ -247,6 +247,8 @@ dashboard "nba_analysis_dashboard" {
   }
 }
 
+# Card Queries
+
 query "total_active_players" {
   sql = <<-EOQ
     select
@@ -277,6 +279,8 @@ query "total_rookie_players" {
       season_exp = 0;
   EOQ
 }
+
+# Chart Queries
 
 query "home_away_wins_by_team" {
   sql = <<-EOQ
