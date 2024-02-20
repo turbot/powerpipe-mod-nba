@@ -1,25 +1,21 @@
 dashboard "nba_analysis_dashboard" {
   title = "NBA Analysis Dashboard"
 
-  # Container: Overview
   container {
     title = "Overview"
 
-    # Card: Total Players
     card {
       query = query.total_active_players
       width = 4
       type  = "info"
     }
 
-    # Card: Total Teams
     card {
       query = query.total_teams
       width = 4
       type  = "info"
     }
 
-    # Card: Rookie Players
     card {
       query = query.total_rookie_players
       width = 4
@@ -236,7 +232,6 @@ dashboard "nba_analysis_dashboard" {
         title = "Average Points Allowed"
         color = "green"
       }
-
     }
   }
 
@@ -365,7 +360,7 @@ query "top_10_team_by_total_wins" {
     order by
       total_wins desc
     limit 10;
-    EOQ
+  EOQ
 }
 
 query "team_arena_capacities" {

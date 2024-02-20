@@ -12,24 +12,28 @@ dashboard "nba_analysis_detail" {
     card {
       query = query.team_foundation_year
       width = 3
+      type  = "info"
       args  = [self.input.team_id.value]
     }
 
     card {
       query = query.team_arena_capacity
       width = 3
+      type  = "info"
       args  = [self.input.team_id.value]
     }
 
     card {
       query = query.team_total_wins
       width = 3
+      type  = "info"
       args  = [self.input.team_id.value]
     }
 
     card {
       query = query.team_points_per_game
       width = 3
+      type  = "info"
       args  = [self.input.team_id.value]
     }
 
