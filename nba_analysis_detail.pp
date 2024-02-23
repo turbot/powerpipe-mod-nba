@@ -31,7 +31,7 @@ dashboard "nba_analysis_detail" {
     }
 
     card {
-      query = query.team_points_per_game
+      query = query.team_average_points_per_game
       width = 3
       type  = "info"
       args  = [self.input.team_id.value]
@@ -78,7 +78,7 @@ dashboard "nba_analysis_detail" {
       table {
         title = "Top 10 experienced Player"
         width = 6
-        query = query.players_experience_in_team
+        query = query.top_10_experienced_players_in_team
         args  = [self.input.team_id.value]
       }
 
@@ -149,7 +149,7 @@ query "team_total_wins" {
   EOQ
 }
 
-query "team_points_per_game" {
+query "team_average_points_per_game" {
   sql = <<-EOQ
     with total_points as (
       select
@@ -259,7 +259,6 @@ query "team_overview" {
   EOQ
 }
 
-
 query "player_nationalities_in_team" {
   sql = <<-EOQ
     select
@@ -277,7 +276,7 @@ query "player_nationalities_in_team" {
   EOQ
 }
 
-query "players_experience_in_team" {
+query "top_10_experienced_players_in_team" {
   sql = <<-EOQ
     select
       display_first_last as "Player Name",
