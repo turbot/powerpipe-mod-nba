@@ -1,23 +1,25 @@
-dashboard "nba_analysis_dashboard" {
-  title = "NBA Analysis Dashboard"
+dashboard "nba_dashboard" {
+
+  title         = "NBA Dashboard"
+  documentation = file("./docs/nba_dashboard.md")
 
   container {
     title = "Overview"
 
     card {
-      query = query.total_active_players
+      query = query.nba_active_players_count
       width = 4
       type  = "info"
     }
 
     card {
-      query = query.total_teams
+      query = query.nba_teams_count
       width = 4
       type  = "info"
     }
 
     card {
-      query = query.total_rookie_players
+      query = query.nba_rookie_players_count
       width = 4
       type  = "info"
     }
@@ -28,8 +30,8 @@ dashboard "nba_analysis_dashboard" {
 
     chart {
       type  = "column"
-      title = "Home vs. Away Wins by Team"
-      query = query.home_away_wins_by_team
+      title = "Home vs Away Wins by Team"
+      query = query.nba_home_away_wins_by_team
       width = 6
 
       legend {
@@ -61,8 +63,8 @@ dashboard "nba_analysis_dashboard" {
 
     chart {
       type  = "column"
-      title = "Total Points Scored at Home vs. Away by Team"
-      query = query.home_away_top_points_by_team
+      title = "Total Points Scored at Home vs Away by Team"
+      query = query.nba_home_away_top_points_by_team
       width = 6
 
       legend {
@@ -98,7 +100,7 @@ dashboard "nba_analysis_dashboard" {
     chart {
       type  = "line"
       title = "Top 10 Teams by Total Wins"
-      query = query.top_10_team_by_total_wins
+      query = query.nba_top_10_team_by_total_wins
       width = 6
 
       legend {
@@ -125,7 +127,7 @@ dashboard "nba_analysis_dashboard" {
     }
 
     chart {
-      query = query.team_arena_capacities
+      query = query.nba_team_arena_capacities
       title = "Team Arena Capacities"
       width = 6
       type  = "column"
@@ -151,7 +153,7 @@ dashboard "nba_analysis_dashboard" {
     chart {
       type  = "column"
       title = "Teams by Points Per Game"
-      query = query.top_teams_by_points_per_game
+      query = query.nba_top_teams_by_points_per_game
       width = 6
 
       legend {
@@ -180,7 +182,7 @@ dashboard "nba_analysis_dashboard" {
     chart {
       type  = "column"
       title = "Player Experience Distribution by Team"
-      query = query.player_experience_distribution_by_team
+      query = query.nba_player_experience_distribution_by_team
       width = 6
 
       legend {
@@ -224,7 +226,7 @@ dashboard "nba_analysis_dashboard" {
     width = 6
 
     chart {
-      query = query.team_average_points_allowed
+      query = query.nba_team_average_points_allowed
       title = "Team Average Points Allowed Per Game"
       type  = "column"
 
@@ -240,7 +242,7 @@ dashboard "nba_analysis_dashboard" {
     width = 6
 
     chart {
-      query = query.player_birth_countries_all
+      query = query.nba_player_birth_countries_all
       title = "International Representation in the NBA"
       type  = "donut"
     }
@@ -249,7 +251,7 @@ dashboard "nba_analysis_dashboard" {
 
 # Card Queries
 
-query "total_active_players" {
+query "nba_active_players_count" {
   sql = <<-EOQ
     select
       count(*) as "Total Active Players"
@@ -260,7 +262,7 @@ query "total_active_players" {
   EOQ
 }
 
-query "total_teams" {
+query "nba_teams_count" {
   sql = <<-EOQ
     select
       count(*) as "Total Teams"
@@ -269,7 +271,7 @@ query "total_teams" {
   EOQ
 }
 
-query "total_rookie_players" {
+query "nba_rookie_players_count" {
   sql = <<-EOQ
     select
       count(*) as "Rookie Players"
@@ -282,7 +284,7 @@ query "total_rookie_players" {
 
 # Chart Queries
 
-query "home_away_wins_by_team" {
+query "nba_home_away_wins_by_team" {
   sql = <<-EOQ
     with home_wins as (
       select
@@ -319,7 +321,7 @@ query "home_away_wins_by_team" {
     EOQ
 }
 
-query "home_away_top_points_by_team" {
+query "nba_home_away_top_points_by_team" {
   sql = <<-EOQ
     with home_points as (
       select
@@ -352,7 +354,7 @@ query "home_away_top_points_by_team" {
   EOQ
 }
 
-query "top_10_team_by_total_wins" {
+query "nba_top_10_team_by_total_wins" {
   sql = <<-EOQ
     select
       team_name_home,
@@ -367,7 +369,7 @@ query "top_10_team_by_total_wins" {
   EOQ
 }
 
-query "team_arena_capacities" {
+query "nba_team_arena_capacities" {
   sql = <<-EOQ
     select
       nickname,
@@ -379,7 +381,7 @@ query "team_arena_capacities" {
   EOQ
 }
 
-query "top_teams_by_points_per_game" {
+query "nba_top_teams_by_points_per_game" {
   sql = <<-EOQ
     with total_points as (
       select
@@ -432,7 +434,7 @@ query "top_teams_by_points_per_game" {
   EOQ
 }
 
-query "player_experience_distribution_by_team" {
+query "nba_player_experience_distribution_by_team" {
   sql = <<-EOQ
     select
       team_name,
@@ -449,7 +451,7 @@ query "player_experience_distribution_by_team" {
   EOQ
 }
 
-query "team_average_points_allowed" {
+query "nba_team_average_points_allowed" {
   sql = <<-EOQ
     select
       team_name,
@@ -474,7 +476,7 @@ query "team_average_points_allowed" {
   EOQ
 }
 
-query "player_birth_countries_all" {
+query "nba_player_birth_countries_all" {
   sql = <<-EOQ
     select
       country,

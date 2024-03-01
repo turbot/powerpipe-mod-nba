@@ -1,10 +1,26 @@
-# NBA Database Mod for PowerPipe
+# NBA Mod for Powerpipe
 
-Analyze teams, players and games data using SQLite and PowerPipe.
+Analyze teams, players and games data using SQLite and Powerpipe.
 
-![nba-analysis-dashboard-image](https://github.com/turbot/powerpipe-mod-nba/assets/72413708/7ecc750f-a1f4-4661-8f5d-2035e663bec9)
+![image](https://github.com/turbot/powerpipe-mod-nba/assets/72413708/7ecc750f-a1f4-4661-8f5d-2035e663bec9)
 
-## Installation
+## Overview
+
+Dashboards can help answer questions like:
+
+- How many active players are there in the NBA?
+- What is the total number of NBA teams?
+- How many rookie players are currently in the NBA?
+- How do home wins compare to away wins across NBA teams?
+- Which teams score more points at home versus away, and what are these scores?
+
+## Documentation
+
+- **[Dashboards →](https://hub.powerpipe.io/mods/turbot/nba/dashboards)**
+
+## Getting Started
+
+### Installation
 
 Download and install Powerpipe (https://powerpipe.io/downloads). Or use Brew:
 
@@ -12,27 +28,20 @@ Download and install Powerpipe (https://powerpipe.io/downloads). Or use Brew:
 brew install turbot/tap/powerpipe
 ```
 
-## Clone the Mod Repository
+Clone:
 
 ```sh
 git clone https://github.com/turbot/powerpipe-mod-nba.git
 cd powerpipe-mod-nba
 ```
 
-## Install the Dataset
+Download the [NBA Database](https://www.kaggle.com/datasets/wyattowalsh/basketball/data) (requires signup with [Kaggle](https://www.kaggle.com/))
 
-- Visit the [NBA Database](https://www.kaggle.com/datasets/wyattowalsh/basketball/data).
+Extract the downloaded file in the current directory:
 
-- Click on `Download` (Free signup to Kaggle is required).
-
-- Unzip the Downloaded File:
-
-  - For Mac/Linux:
-    - Use the command `unzip ~/Downloads/archive.zip` to extract the file.
-
-  - For Windows:
-    - Navigate to the folder containing the downloaded ZIP file, usually the Downloads folder.
-    - Right-click on the ZIP file and choose `Extract All...` or `Extract Here` depending on your preference. Follow the on-screen instructions to complete the extraction.
+```sh
+unzip ~/Downloads/archive.zip
+```
 
 ## Usage
 
@@ -40,12 +49,6 @@ Run the dashboard and specify the DB connection string:
 
 ```sh
 powerpipe server --database sqlite:nba.sqlite
-```
-
-If you have extracted the file in any other location then you need to provide the full path like below:
-
-```sh
-powerpipe server --database sqlite:///path/to/the/file/file.sqlite
 ```
 
 ## Open Source & Contributing

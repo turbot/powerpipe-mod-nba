@@ -1,37 +1,39 @@
-dashboard "nba_analysis_detail" {
-  title = "NBA Analysis Detail"
+dashboard "nba_team_detail" {
+
+  title         = "NBA Team Detail"
+  documentation = file("./docs/nba_team_detail.md")
 
   input "team_id" {
     title = "Select a Team:"
-    query = query.team_input
+    query = query.nba_team_input
     width = 4
   }
 
   container {
 
     card {
-      query = query.team_foundation_year
+      query = query.nba_team_foundation_year
       width = 3
       type  = "info"
       args  = [self.input.team_id.value]
     }
 
     card {
-      query = query.team_arena_capacity
+      query = query.nba_team_arena_capacity
       width = 3
       type  = "info"
       args  = [self.input.team_id.value]
     }
 
     card {
-      query = query.team_total_wins
+      query = query.nba_team_total_wins
       width = 3
       type  = "info"
       args  = [self.input.team_id.value]
     }
 
     card {
-      query = query.team_average_points_per_game
+      query = query.nba_team_average_points_per_game
       width = 3
       type  = "info"
       args  = [self.input.team_id.value]
@@ -47,12 +49,12 @@ dashboard "nba_analysis_detail" {
       chart {
         title = "Team Performance Over Time"
         width = 6
-        query = query.team_performance_over_time
+        query = query.nba_team_performance_over_time
         args  = [self.input.team_id.value]
         axes {
           x {
             title {
-              value = "Years"
+              value = "Year"
             }
           }
           y {
@@ -67,7 +69,7 @@ dashboard "nba_analysis_detail" {
         title = "Team Overview"
         width = 6
         type  = "line"
-        query = query.team_overview
+        query = query.nba_team_overview
         args  = [self.input.team_id.value]
       }
     }
@@ -76,9 +78,9 @@ dashboard "nba_analysis_detail" {
       width = 12
 
       table {
-        title = "Top 10 experienced Player"
+        title = "Top 10 Experienced Players"
         width = 6
-        query = query.top_10_experienced_players_in_team
+        query = query.nba_top_10_experienced_players_in_team
         args  = [self.input.team_id.value]
       }
 
@@ -86,7 +88,7 @@ dashboard "nba_analysis_detail" {
         title = "Player Nationalities in the Team"
         width = 6
         type  = "pie"
-        query = query.player_nationalities_in_team
+        query = query.nba_player_nationalities_in_team
         args  = [self.input.team_id.value]
       }
     }
@@ -97,7 +99,7 @@ dashboard "nba_analysis_detail" {
 
 # Input query
 
-query "team_input" {
+query "nba_team_input" {
   sql = <<-EOQ
     select
       full_name as label,
@@ -111,7 +113,7 @@ query "team_input" {
 
 # Card queries
 
-query "team_foundation_year" {
+query "nba_team_foundation_year" {
   sql = <<-EOQ
     select
       'Foundation Year' as label,
@@ -123,7 +125,7 @@ query "team_foundation_year" {
   EOQ
 }
 
-query "team_arena_capacity" {
+query "nba_team_arena_capacity" {
   sql = <<-EOQ
     select
       'Arena Capacity' as label,
@@ -137,7 +139,7 @@ query "team_arena_capacity" {
   EOQ
 }
 
-query "team_total_wins" {
+query "nba_team_total_wins" {
   sql = <<-EOQ
     select
       'Total Wins' as label,
@@ -149,7 +151,7 @@ query "team_total_wins" {
   EOQ
 }
 
-query "team_average_points_per_game" {
+query "nba_team_average_points_per_game" {
   sql = <<-EOQ
     with total_points as (
       select
@@ -210,7 +212,7 @@ query "team_average_points_per_game" {
 
 # Other detail page queries
 
-query "team_performance_over_time" {
+query "nba_team_performance_over_time" {
   sql = <<-EOQ
     select
       gs.season,
@@ -227,7 +229,7 @@ query "team_performance_over_time" {
   EOQ
 }
 
-query "player_experience_distribution_by_team_detail" {
+query "nba_player_experience_distribution_by_team_detail" {
   sql = <<-EOQ
     select
       season_exp,
@@ -243,7 +245,7 @@ query "player_experience_distribution_by_team_detail" {
   EOQ
 }
 
-query "team_overview" {
+query "nba_team_overview" {
   sql = <<-EOQ
     select
       full_name as 'Team Name',
@@ -259,7 +261,7 @@ query "team_overview" {
   EOQ
 }
 
-query "player_nationalities_in_team" {
+query "nba_player_nationalities_in_team" {
   sql = <<-EOQ
     select
       country as label,
@@ -276,7 +278,7 @@ query "player_nationalities_in_team" {
   EOQ
 }
 
-query "top_10_experienced_players_in_team" {
+query "nba_top_10_experienced_players_in_team" {
   sql = <<-EOQ
     select
       display_first_last as "Player Name",
