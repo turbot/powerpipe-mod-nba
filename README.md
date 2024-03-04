@@ -35,7 +35,7 @@ git clone https://github.com/turbot/powerpipe-mod-nba.git
 cd powerpipe-mod-nba
 ```
 
-Download the [NBA Database](https://www.kaggle.com/datasets/wyattowalsh/basketball/data) (requires signup with [Kaggle](https://www.kaggle.com/))
+Download the [NBA Database](https://www.kaggle.com/datasets/wyattowalsh/basketball/versions/231) (requires signup with [Kaggle](https://www.kaggle.com/))
 
 Extract the downloaded file in the current directory:
 
