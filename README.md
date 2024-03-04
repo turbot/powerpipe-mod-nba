@@ -2,7 +2,7 @@
 
 Analyze teams, players and games data using SQLite and Powerpipe.
 
-![image](https://github.com/turbot/powerpipe-mod-nba/assets/72413708/7ecc750f-a1f4-4661-8f5d-2035e663bec9)
+![image](https://github.com/turbot/powerpipe-mod-nba/blob/nba/docs/nba_dashboard_screenshot.png)
 
 ## Overview
 
