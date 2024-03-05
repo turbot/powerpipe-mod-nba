@@ -28,7 +28,7 @@ Download and install Powerpipe (https://powerpipe.io/downloads). Or use Brew:
 brew install turbot/tap/powerpipe
 ```
 
-Install the mod::
+Install the mod:
 
 ```sh
 mkdir dashboards
