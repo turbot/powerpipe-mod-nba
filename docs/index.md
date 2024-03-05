@@ -18,11 +18,13 @@ Download and install Powerpipe (https://powerpipe.io/downloads). Or use Brew:
 brew install turbot/tap/powerpipe
 ```
 
-Clone:
+Install the mod:
 
 ```sh
-git clone https://github.com/turbot/powerpipe-mod-nba.git
-cd powerpipe-mod-nba
+mkdir dashboards
+cd dashboards
+powerpipe mod init
+powerpipe mod install github.com/turbot/powerpipe-mod-nba
 ```
 
 Download the [NBA Database](https://www.kaggle.com/datasets/wyattowalsh/basketball/data) (requires signup with [Kaggle](https://www.kaggle.com/))
