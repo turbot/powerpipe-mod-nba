@@ -1,18 +1,12 @@
-# NBA Mod for Powerpipe
+---
+repository: "https://github.com/turbot/powerpipe-mod-nba"
+---
+
+# NBA Mod
 
 Analyze teams, players and games data using SQLite and Powerpipe.
 
-![image](https://github.com/turbot/powerpipe-mod-nba/blob/nba/docs/nba_dashboard_screenshot.png)
-
-## Overview
-
-Dashboards can help answer questions like:
-
-- How many active players are there in the NBA?
-- What is the total number of NBA teams?
-- How many rookie players are currently in the NBA?
-- How do home wins compare to away wins across NBA teams?
-- Which teams score more points at home versus away, and what are these scores?
+<img src="https://raw.githubusercontent.com/turbot/powerpipe-mod-nba/nba/docs/nba_dashboard_screenshot.png" width="50%" type="thumbnail"/>
 
 ## Documentation
 
