@@ -39,7 +39,7 @@ powerpipe mod install github.com/turbot/powerpipe-mod-nba
 
 Download the [NBA Database](https://www.kaggle.com/datasets/wyattowalsh/basketball/versions/231) (requires signup with [Kaggle](https://www.kaggle.com/))
 
-Extract the downloaded file in the current directory:
+Extract the downloaded file into the dashboards directory:
 
 ```sh
 unzip ~/Downloads/archive.zip
