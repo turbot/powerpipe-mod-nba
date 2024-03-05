@@ -1,10 +1,6 @@
----
-repository: "https://github.com/turbot/powerpipe-mod-nba"
----
-
 # NBA Mod
 
-Analyze teams, players and games data using SQLite and Powerpipe.
+Analyze teams, players, and game data using SQLite and Powerpipe.
 
 <img src="https://raw.githubusercontent.com/turbot/powerpipe-mod-nba/nba/docs/nba_dashboard_screenshot.png" width="50%" type="thumbnail"/>
 
