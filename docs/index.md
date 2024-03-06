@@ -1,14 +1,14 @@
 # NBA Mod
 
-Analyze teams, players, and game data using SQLite and Powerpipe.
+View dashboards to analyze [NBA](https://www.nba.com/) teams, players, games, and more.
 
-<img src="https://raw.githubusercontent.com/turbot/powerpipe-mod-nba/nba/docs/nba_dashboard_screenshot.png" width="50%" type="thumbnail"/>
+<img src="https://raw.githubusercontent.com/turbot/powerpipe-mod-nba/main/docs/nba_dashboard_screenshot.png" width="50%" type="thumbnail"/>
 
 ## Documentation
 
 - **[Dashboards →](https://hub.powerpipe.io/mods/turbot/nba/dashboards)**
 
-## Getting started
+## Getting Started
 
 ### Installation
 
@@ -27,21 +27,23 @@ powerpipe mod init
 powerpipe mod install github.com/turbot/powerpipe-mod-nba
 ```
 
-Download the [NBA Database](https://www.kaggle.com/datasets/wyattowalsh/basketball/data) (requires signup with [Kaggle](https://www.kaggle.com/))
+Download the [NBA Database](https://www.kaggle.com/datasets/wyattowalsh/basketball/versions/231) (requires signup with [Kaggle](https://www.kaggle.com/))
 
-Extract the downloaded file in the current directory:
+Extract the downloaded file into the dashboards directory:
 
 ```sh
 unzip ~/Downloads/archive.zip
 ```
 
-## Usage
+### Browsing Dashboards
 
-Run the dashboard and specify the DB connection string:
+Start the dashboard server with the DB connection string:
 
 ```sh
 powerpipe server --database sqlite:nba.sqlite
 ```
+
+Browse and view your dashboards at **https://localhost:9033**.
 
 ## Open Source & Contributing
 

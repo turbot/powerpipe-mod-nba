@@ -1,7 +1,7 @@
-dashboard "nba_dashboard" {
+dashboard "nba" {
 
   title         = "NBA Dashboard"
-  documentation = file("./docs/nba_dashboard.md")
+  documentation = file("./docs/nba.md")
 
   container {
     title = "Overview"

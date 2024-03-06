@@ -2,7 +2,7 @@
 
 View dashboards to analyze [NBA](https://www.nba.com/) teams, players, games, and more.
 
-![image](https://github.com/turbot/powerpipe-mod-nba/blob/nba/docs/nba_dashboard_screenshot.png)
+![image](https://raw.githubusercontent.com/turbot/powerpipe-mod-nba/main/docs/nba_dashboard_screenshot.png)
 
 ## Overview
 
@@ -18,7 +18,7 @@ Dashboards can help answer questions like:
 
 - **[Dashboards →](https://hub.powerpipe.io/mods/turbot/nba/dashboards)**
 
-## Getting started
+## Getting Started
 
 ### Installation
 
